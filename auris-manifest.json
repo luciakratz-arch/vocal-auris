@@ -1,0 +1,14 @@
+{
+  "name": "Vocal Auris",
+  "short_name": "Auris",
+  "description": "Portal de Gestão — Vocal Auris · FacUnicamps",
+  "start_url": "/vocal-auris/",
+  "scope": "/vocal-auris/",
+  "display": "standalone",
+  "background_color": "#7B00A0",
+  "theme_color": "#7B00A0",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
