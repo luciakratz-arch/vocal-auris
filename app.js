@@ -1209,9 +1209,9 @@ function Login(_ref7) {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      width: 96,
-      height: 96,
-      borderRadius: 14,
+      width: 90,
+      height: 90,
+      borderRadius: "50%",
       overflow: "hidden",
       margin: "0 auto 16px",
       boxShadow: "0 4px 20px rgba(123,0,160,0.25)"
@@ -1606,7 +1606,16 @@ function Login(_ref7) {
       fontSize: 11,
       color: "#CCC"
     }
-  }, config.nomeApp || "Vocal Auris", " \xB7 Portal de Gest\xE3o"));
+  }, config.nomeApp || "Vocal Auris", " \xB7 Portal de Gest\xE3o"), /*#__PURE__*/React.createElement("div", {
+    style: {textAlign:"center", marginTop:16, paddingTop:12, borderTop:"1px solid rgba(0,0,0,0.07)"}
+  },
+    /*#__PURE__*/React.createElement("div", {style:{fontSize:9, color:"#bbb", marginBottom:8, textTransform:"uppercase", letterSpacing:1}}, "Apoio Institucional"),
+    /*#__PURE__*/React.createElement("img", {
+      src: FACUNICAMPS_LOGO,
+      alt: "FacUnicamps",
+      style: {height:36, objectFit:"contain", display:"block", margin:"0 auto", opacity:0.6}
+    })
+  ));
 }
 
 // ── PAINEL ────────────────────────────────────────────────────────────────────
