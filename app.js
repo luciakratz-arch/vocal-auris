@@ -1209,9 +1209,9 @@ function Login(_ref7) {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      width: 90,
-      height: 90,
-      borderRadius: "50%",
+      width: 96,
+      height: 96,
+      borderRadius: 14,
       overflow: "hidden",
       margin: "0 auto 16px",
       boxShadow: "0 4px 20px rgba(123,0,160,0.25)"
@@ -1220,8 +1220,10 @@ function Login(_ref7) {
     src: config.logoUrl || LOGO_URL,
     alt: "Logo",
     style: {
-      width: 64,
-      height: 64,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      display: "block",
       objectFit: "contain"
     },
     onError: function onError(e) {
