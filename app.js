@@ -306,8 +306,13 @@ function CadastroPublico(_ref2) {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      textAlign: "center",
-      marginBottom: 24
+      width: 100,
+      height: 100,
+      borderRadius: "50%",
+      overflow: "hidden",
+      margin: "0 auto 16px",
+      boxShadow: "0 4px 20px rgba(123,0,160,0.3)",
+      flexShrink: 0
     }
   }, /*#__PURE__*/React.createElement("img", {
     src: config.logoUrl || LOGO_URL,
@@ -316,7 +321,6 @@ function CadastroPublico(_ref2) {
       width: "100%",
       height: "100%",
       objectFit: "cover",
-      borderRadius: "50%",
       display: "block"
     },
     onError: function onError(e) {
