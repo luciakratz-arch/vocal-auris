@@ -1222,9 +1222,7 @@ function Login(_ref7) {
     style: {
       width: "100%",
       height: "100%",
-      objectFit: "cover",
-      display: "block",
-      objectFit: "contain"
+      objectFit: "cover"
     },
     onError: function onError(e) {
       return e.target.style.display = "none";
