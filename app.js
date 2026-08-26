@@ -309,30 +309,21 @@ function CadastroPublico(_ref2) {
       textAlign: "center",
       marginBottom: 24
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: 80,
-      height: 80,
-      background: "#7B00A0",
-      borderRadius: 16,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      margin: "0 auto 14px",
-      boxShadow: "0 4px 20px rgba(123,0,160,0.3)"
-    }
   }, /*#__PURE__*/React.createElement("img", {
     src: config.logoUrl || LOGO_URL,
     alt: "",
     style: {
-      width: 56,
-      height: 56,
-      objectFit: "contain"
+      width: 90,
+      height: 90,
+      objectFit: "contain",
+      borderRadius: 16,
+      display: "block",
+      margin: "0 auto 14px"
     },
     onError: function onError(e) {
       return e.target.style.display = "none";
     }
-  })), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: "'Playfair Display',serif",
       fontSize: 22,
