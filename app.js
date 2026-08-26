@@ -313,12 +313,11 @@ function CadastroPublico(_ref2) {
     src: config.logoUrl || LOGO_URL,
     alt: "",
     style: {
-      width: 90,
-      height: 90,
-      objectFit: "contain",
-      borderRadius: 16,
-      display: "block",
-      margin: "0 auto 14px"
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      borderRadius: "50%",
+      display: "block"
     },
     onError: function onError(e) {
       return e.target.style.display = "none";
@@ -1208,13 +1207,10 @@ function Login(_ref7) {
     style: {
       width: 90,
       height: 90,
-      background: "#fff",
       borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      overflow: "hidden",
       margin: "0 auto 16px",
-      boxShadow: "0 4px 20px rgba(0,0,0,0.1)"
+      boxShadow: "0 4px 20px rgba(123,0,160,0.25)"
     }
   }, /*#__PURE__*/React.createElement("img", {
     src: config.logoUrl || LOGO_URL,
