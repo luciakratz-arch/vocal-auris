@@ -1622,16 +1622,16 @@ function Login(_ref7) {
 function Painel(_ref8) {
   var user = _ref8.user,
     config = _ref8.config;
-  var _useCollection = useCollection("members"),
+  var _useCollection = useCollection("auris_members"),
     members = _useCollection.data,
     lM = _useCollection.loading;
   var _useCollection2 = useCollection("events", "date"),
     events = _useCollection2.data,
     lE = _useCollection2.loading;
-  var _useCollection3 = useCollection("songs"),
+  var _useCollection3 = useCollection("auris_songs"),
     songs = _useCollection3.data,
     lS = _useCollection3.loading;
-  var _useCollection4 = useCollection("avisos"),
+  var _useCollection4 = useCollection("auris_avisos"),
     avisos = _useCollection4.data,
     lA = _useCollection4.loading;
   if (lM || lE || lS || lA) return /*#__PURE__*/React.createElement(Spinner, null);
@@ -2328,7 +2328,7 @@ function ModalIntegrante(_ref9) {
 // ── INTEGRANTES ───────────────────────────────────────────────────────────────
 function Integrantes(_ref0) {
   var config = _ref0.config;
-  var _useCollection5 = useCollection("members"),
+  var _useCollection5 = useCollection("auris_members"),
     members = _useCollection5.data,
     loading = _useCollection5.loading;
   var _useState37 = useState(""),
@@ -2941,7 +2941,7 @@ function ModalEvento(_ref10) {
     onClose = _ref10.onClose,
     config = _ref10.config;
   var cor = config.corPrimaria || COR;
-  var _useCollection6 = useCollection("songs"),
+  var _useCollection6 = useCollection("auris_songs"),
     songs = _useCollection6.data;
   var vazio = {
     title: "",
@@ -4332,10 +4332,10 @@ function ModalAviso(_ref13) {
 function Avisos(_ref14) {
   var config = _ref14.config,
     isAdmin = _ref14.isAdmin;
-  var _useCollection8 = useCollection("avisos"),
+  var _useCollection8 = useCollection("auris_avisos"),
     avisos = _useCollection8.data,
     lA = _useCollection8.loading;
-  var _useCollection9 = useCollection("members"),
+  var _useCollection9 = useCollection("auris_members"),
     members = _useCollection9.data;
   var _useState73 = useState(false),
     _useState74 = _slicedToArray(_useState73, 2),
@@ -5248,7 +5248,7 @@ function ModalMusica(_ref15) {
 function Repertorio(_ref16) {
   var config = _ref16.config,
     isAdmin = _ref16.isAdmin;
-  var _useCollection0 = useCollection("songs"),
+  var _useCollection0 = useCollection("auris_songs"),
     songs = _useCollection0.data,
     loading = _useCollection0.loading;
   var _useState89 = useState(""),
@@ -5961,7 +5961,7 @@ function ModalEstudo(_ref18) {
 function SalaEstudos(_ref19) {
   var config = _ref19.config,
     isAdmin = _ref19.isAdmin;
-  var _useCollection1 = useCollection("estudos"),
+  var _useCollection1 = useCollection("auris_estudos"),
     estudos = _useCollection1.data,
     loading = _useCollection1.loading;
   var _useState103 = useState("Todos"),
@@ -7138,9 +7138,9 @@ function Relatorios(_ref32) {
   var config = _ref32.config;
   var _useCollection11 = useCollection("events", "date"),
     events = _useCollection11.data;
-  var _useCollection12 = useCollection("members"),
+  var _useCollection12 = useCollection("auris_members"),
     members = _useCollection12.data;
-  var _useCollection13 = useCollection("songs"),
+  var _useCollection13 = useCollection("auris_songs"),
     songs = _useCollection13.data;
   var _useCollection14 = useCollection("frequencias", "dataHora"),
     frequencias = _useCollection14.data;
@@ -9070,7 +9070,7 @@ function Declaracao(_ref43) {
   var config = _ref43.config;
   var _useCollection16 = useCollection("events", "date"),
     events = _useCollection16.data;
-  var _useCollection17 = useCollection("members"),
+  var _useCollection17 = useCollection("auris_members"),
     members = _useCollection17.data;
   var _useCollection18 = useCollection("frequencias", "dataHora"),
     frequencias = _useCollection18.data;
@@ -9540,13 +9540,13 @@ function EmBreve(_ref44) {
 function PainelCorista(_ref45) {
   var user = _ref45.user,
     config = _ref45.config;
-  var _useCollection19 = useCollection("avisos"),
+  var _useCollection19 = useCollection("auris_avisos"),
     avisos = _useCollection19.data;
   var _useCollection20 = useCollection("events", "date"),
     events = _useCollection20.data;
-  var _useCollection21 = useCollection("songs"),
+  var _useCollection21 = useCollection("auris_songs"),
     songs = _useCollection21.data;
-  var _useCollection22 = useCollection("noticias"),
+  var _useCollection22 = useCollection("auris_noticias"),
     noticias = _useCollection22.data;
   var _useState171 = useState(new Date().getMonth()),
     _useState172 = _slicedToArray(_useState171, 2),
@@ -10849,15 +10849,15 @@ function ModalNoticia(_ref47) {
 function AreaRH(_ref48) {
   var config = _ref48.config,
     abaInicial = _ref48.abaInicial;
-  var _useCollection24 = useCollection("members"),
+  var _useCollection24 = useCollection("auris_members"),
     members = _useCollection24.data;
   var _useCollection25 = useCollection("events", "date"),
     events = _useCollection25.data;
   var _useCollection26 = useCollection("frequencias", "dataHora"),
     frequencias = _useCollection26.data;
-  var _useCollection27 = useCollection("noticias"),
+  var _useCollection27 = useCollection("auris_noticias"),
     noticias = _useCollection27.data;
-  var _useCollection28 = useCollection("relatorios_historico"),
+  var _useCollection28 = useCollection("auris_relatorios_historico"),
     relatorios = _useCollection28.data;
   var _useState193 = useState(abaInicial || "dashboard"),
     _useState194 = _slicedToArray(_useState193, 2),
