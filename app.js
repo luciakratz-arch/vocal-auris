@@ -1625,7 +1625,7 @@ function Painel(_ref8) {
   var _useCollection = useCollection("auris_members"),
     members = _useCollection.data,
     lM = _useCollection.loading;
-  var _useCollection2 = useCollection("events", "date"),
+  var _useCollection2 = useCollection("auris_events", "date"),
     events = _useCollection2.data,
     lE = _useCollection2.loading;
   var _useCollection3 = useCollection("auris_songs"),
@@ -3736,7 +3736,7 @@ function ModalExcluirEvento(_ref11) {
 function Agenda(_ref12) {
   var config = _ref12.config,
     isAdmin = _ref12.isAdmin;
-  var _useCollection7 = useCollection("events", "date"),
+  var _useCollection7 = useCollection("auris_events", "date"),
     events = _useCollection7.data,
     loading = _useCollection7.loading;
   var _useState57 = useState(new Date().getMonth()),
@@ -6252,7 +6252,7 @@ function SalaEstudos(_ref19) {
 // ── APRESENTAÇÃO ──────────────────────────────────────────────────────────────
 function Apresentacao(_ref21) {
   var config = _ref21.config;
-  var _useCollection10 = useCollection("events", "date"),
+  var _useCollection10 = useCollection("auris_events", "date"),
     events = _useCollection10.data;
   var _useState109 = useState(null),
     _useState110 = _slicedToArray(_useState109, 2),
@@ -7136,7 +7136,7 @@ function FrequenciaAcesso(_ref25) {
 // ── RELATÓRIOS ────────────────────────────────────────────────────────────────
 function Relatorios(_ref32) {
   var config = _ref32.config;
-  var _useCollection11 = useCollection("events", "date"),
+  var _useCollection11 = useCollection("auris_events", "date"),
     events = _useCollection11.data;
   var _useCollection12 = useCollection("auris_members"),
     members = _useCollection12.data;
@@ -8536,7 +8536,7 @@ function CheckinPublico(_ref41) {
 }
 function Frequencia(_ref42) {
   var config = _ref42.config;
-  var _useCollection15 = useCollection("events", "date"),
+  var _useCollection15 = useCollection("auris_events", "date"),
     events = _useCollection15.data;
   var _useState147 = useState(""),
     _useState148 = _slicedToArray(_useState147, 2),
@@ -9068,7 +9068,7 @@ function Frequencia(_ref42) {
 // ── DECLARAÇÃO DIGITAL ────────────────────────────────────────────────────────
 function Declaracao(_ref43) {
   var config = _ref43.config;
-  var _useCollection16 = useCollection("events", "date"),
+  var _useCollection16 = useCollection("auris_events", "date"),
     events = _useCollection16.data;
   var _useCollection17 = useCollection("auris_members"),
     members = _useCollection17.data;
@@ -9542,7 +9542,7 @@ function PainelCorista(_ref45) {
     config = _ref45.config;
   var _useCollection19 = useCollection("auris_avisos"),
     avisos = _useCollection19.data;
-  var _useCollection20 = useCollection("events", "date"),
+  var _useCollection20 = useCollection("auris_events", "date"),
     events = _useCollection20.data;
   var _useCollection21 = useCollection("auris_songs"),
     songs = _useCollection21.data;
@@ -10851,7 +10851,7 @@ function AreaRH(_ref48) {
     abaInicial = _ref48.abaInicial;
   var _useCollection24 = useCollection("auris_members"),
     members = _useCollection24.data;
-  var _useCollection25 = useCollection("events", "date"),
+  var _useCollection25 = useCollection("auris_events", "date"),
     events = _useCollection25.data;
   var _useCollection26 = useCollection("frequencias", "dataHora"),
     frequencias = _useCollection26.data;
