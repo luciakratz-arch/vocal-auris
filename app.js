@@ -507,8 +507,39 @@ function PlayerModal(_ref3) {
     title = _ref3.title,
     onClose = _ref3.onClose,
     letra = _ref3.letra,
-    naipes = _ref3.naipes;
+    naipes = _ref3.naipes,
+    songId = _ref3.songId;
   if (!url) return null;
+  var isMobile = window.innerWidth < 600;
+  var hasMedia = url && url !== "letra";
+  var hasLetra = !!(letra);
+  var canSplit = hasMedia && hasLetra;
+  var _useState_split = React.useState(false), showSplit = _useState_split[0], setShowSplit = _useState_split[1];
+  var _useState_letraEdit = React.useState(letra || ""), letraEdit = _useState_letraEdit[0], setLetraEdit = _useState_letraEdit[1];
+  var _useState_letraMode = React.useState("view"), letraMode = _useState_letraMode[0], setLetraMode = _useState_letraMode[1];
+  var _useState_letraSaving = React.useState(false), letraSaving = _useState_letraSaving[0], setLetraSaving = _useState_letraSaving[1];
+  var _useState_letraMsg = React.useState(""), letraMsg = _useState_letraMsg[0], setLetraMsg = _useState_letraMsg[1];
+  var letraRef = React.useRef(null);
+  function salvarLetra() {
+    if (!songId) return;
+    setLetraSaving(true);
+    db.collection("auris_songs").doc(songId).update({ letra: letraEdit, updatedAt: firebase.firestore.FieldValue.serverTimestamp() })
+      .then(function() { setLetraSaving(false); setLetraMode("view"); setLetraMsg("✅ Salvo!"); setTimeout(function() { setLetraMsg(""); }, 2500); })
+      .catch(function() { setLetraSaving(false); setLetraMsg("❌ Erro ao salvar"); });
+  }
+  function renderLetraFormatada(txt) {
+    if (!txt) return null;
+    var lines = txt.split("\n");
+    return lines.map(function(line, li) {
+      var parts = line.split(/(\*\*[^*]+\*\*|_[^_]+_)/g);
+      var rendered = parts.map(function(p, i) {
+        if (/^\*\*(.+)\*\*$/.test(p)) return React.createElement("strong", { key: i }, p.slice(2,-2));
+        if (/^_(.+)_$/.test(p)) return React.createElement("em", { key: i }, p.slice(1,-1));
+        return p;
+      });
+      return React.createElement("div", { key: li, style: { minHeight: "1.85em" } }, rendered);
+    });
+  }
   function getEmbedUrl(url) {
     // YouTube
     var ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
@@ -595,7 +626,19 @@ function PlayerModal(_ref3) {
       padding: "14px 18px",
       borderBottom: "1px solid #333"
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: onClose,
+    style: {
+      background: "none",
+      border: "none",
+      color: "#fff",
+      fontSize: 22,
+      cursor: "pointer",
+      padding: "0 10px 0 0",
+      lineHeight: 1,
+      flexShrink: 0
+    }
+  }, "←"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       fontWeight: 600,
@@ -606,7 +649,28 @@ function PlayerModal(_ref3) {
       whiteSpace: "nowrap",
       paddingRight: 12
     }
-  }, title || "Reproduzindo"), /*#__PURE__*/React.createElement("button", {
+  }, title || "Reproduzindo"), canSplit && /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() { setShowSplit(function(v) { return !v; }); },
+    style: {
+      background: showSplit ? "rgba(123,0,160,0.25)" : "rgba(255,255,255,0.1)",
+      border: "none",
+      borderRadius: 8,
+      padding: "4px 10px",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      color: "#fff",
+      fontSize: 12,
+      fontWeight: 600,
+      marginRight: 8,
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "columns",
+    size: 14,
+    color: "#fff"
+  }), !isMobile && " Dividir"), /*#__PURE__*/React.createElement("button", {
     onClick: onClose,
     style: {
       background: "rgba(255,255,255,0.1)",
@@ -626,7 +690,19 @@ function PlayerModal(_ref3) {
     color: "#fff"
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
+      display: "flex",
+      flexDirection: showSplit ? "row" : "column",
+      flex: 1,
+      overflow: "hidden",
       background: "#000"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: showSplit ? "0 0 50%" : "none",
+      display: "flex",
+      flexDirection: "column",
+      overflow: "hidden",
+      minWidth: 0
     }
   }, (type === "youtube" || type === "iframe") && url !== "letra" && /*#__PURE__*/React.createElement("iframe", {
     src: embed,
@@ -686,23 +762,92 @@ function PlayerModal(_ref3) {
       display: "block"
     },
     title: title
-  })), letra && /*#__PURE__*/React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "20px 24px",
-      background: "#1A1D23",
-      maxHeight: 400,
-      overflowY: "auto"
+      flex: showSplit ? "0 0 50%" : "none",
+      display: showSplit || (url === "letra") ? "flex" : (letra ? "block" : "none"),
+      flexDirection: "column",
+      overflow: "hidden",
+      minWidth: 0,
+      background: "#1A1D23"
     }
-  }, /*#__PURE__*/React.createElement("pre", {
+  }, letra && /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 14,
+      padding: "12px 16px 6px",
+      display: "flex",
+      gap: 6,
+      alignItems: "center",
+      borderBottom: "1px solid #333",
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: { fontSize: 11, color: "#AAA", flex: 1 }
+  }, "📄 Letra"), letraMsg && /*#__PURE__*/React.createElement("span", { style: { fontSize: 11, color: "#7B00A0" } }, letraMsg),
+  letraMode === "view" ? /*#__PURE__*/React.createElement(React.Fragment, null,
+    /*#__PURE__*/React.createElement("button", {
+      onClick: function() { setLetraEdit(letra); setLetraMode("edit"); },
+      style: { background: "none", border: "none", color: "#AAA", fontSize: 11, cursor: "pointer", padding: "2px 6px" }
+    }, "✏️ Editar")
+  ) : /*#__PURE__*/React.createElement(React.Fragment, null,
+    /*#__PURE__*/React.createElement("button", {
+      onClick: function() {
+        var ta = letraRef.current;
+        if (!ta) return;
+        var s = ta.selectionStart, e = ta.selectionEnd;
+        if (s === e) return;
+        var sel = letraEdit.slice(s, e);
+        var rep = "**" + sel + "**";
+        setLetraEdit(letraEdit.slice(0, s) + rep + letraEdit.slice(e));
+      },
+      style: { background: "rgba(255,255,255,0.1)", border: "none", color: "#fff", fontSize: 11, fontWeight: 700, cursor: "pointer", borderRadius: 4, padding: "2px 6px" }
+    }, "B"),
+    /*#__PURE__*/React.createElement("button", {
+      onClick: function() {
+        var ta = letraRef.current;
+        if (!ta) return;
+        var s = ta.selectionStart, e = ta.selectionEnd;
+        if (s === e) return;
+        var sel = letraEdit.slice(s, e);
+        var rep = "_" + sel + "_";
+        setLetraEdit(letraEdit.slice(0, s) + rep + letraEdit.slice(e));
+      },
+      style: { background: "rgba(255,255,255,0.1)", border: "none", color: "#fff", fontSize: 11, fontStyle: "italic", cursor: "pointer", borderRadius: 4, padding: "2px 6px" }
+    }, "I"),
+    /*#__PURE__*/React.createElement("button", {
+      onClick: salvarLetra,
+      disabled: letraSaving,
+      style: { background: "#7B00A0", border: "none", color: "#fff", fontSize: 11, fontWeight: 700, cursor: "pointer", borderRadius: 4, padding: "2px 8px" }
+    }, letraSaving ? "..." : "Salvar"),
+    /*#__PURE__*/React.createElement("button", {
+      onClick: function() { setLetraMode("view"); },
+      style: { background: "none", border: "none", color: "#AAA", fontSize: 11, cursor: "pointer", padding: "2px 6px" }
+    }, "Cancelar")
+  )), letra && letraMode === "view" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "16px 20px",
+      overflowY: "auto",
+      flex: 1
+    }
+  }, renderLetraFormatada(letra)),
+  letra && letraMode === "edit" && /*#__PURE__*/React.createElement("textarea", {
+    ref: letraRef,
+    value: letraEdit,
+    onChange: function(e) { setLetraEdit(e.target.value); },
+    style: {
+      flex: 1,
+      width: "100%",
+      background: "#111",
       color: "#EEE",
+      border: "none",
+      outline: "none",
+      padding: "16px 20px",
+      fontSize: 13,
       lineHeight: 1.8,
       fontFamily: "inherit",
-      whiteSpace: "pre-wrap",
-      margin: 0
+      resize: "none",
+      overflowY: "auto"
     }
-  }, letra)), naipes && /*#__PURE__*/React.createElement("div", {
+  }))), naipes && /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "16px 18px",
       background: "#1A1D23"
@@ -772,7 +917,7 @@ function PlayerModal(_ref3) {
     name: "external-link",
     size: 12,
     color: "#AAA"
-  }), " Abrir em nova aba"))));
+  }), " Abrir em nova aba")));
 }
 
 // ── MESA DE SOM (página pública para sonoplasta) ──────────────────────────────
@@ -5280,7 +5425,9 @@ function Repertorio(_ref16) {
         e.stopPropagation();
         setPlayer({
           url: url,
-          title: label
+          title: label,
+          letra: s.letra,
+          songId: s.id
         });
       },
       style: {
@@ -5498,7 +5645,8 @@ function Repertorio(_ref16) {
         setPlayer({
           url: "letra",
           title: s.title,
-          letra: s.letra
+          letra: s.letra,
+          songId: s.id
         });
       },
       style: {
@@ -5538,7 +5686,8 @@ function Repertorio(_ref16) {
       return setPlayer(null);
     },
     letra: player.letra,
-    naipes: player.naipes
+    naipes: player.naipes,
+    songId: player.songId
   }));
 }
 
@@ -6245,7 +6394,8 @@ function SalaEstudos(_ref19) {
     title: player.title,
     onClose: function onClose() {
       return setPlayer(null);
-    }
+    },
+    songId: player.songId
   }));
 }
 
