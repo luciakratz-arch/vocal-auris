@@ -696,7 +696,7 @@ function PlayerModal(_ref3) {
       overflow: "hidden",
       background: "#000"
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, hasMedia && /*#__PURE__*/React.createElement("div", {
     style: {
       flex: showSplit ? "0 0 50%" : "none",
       display: "flex",
@@ -764,8 +764,8 @@ function PlayerModal(_ref3) {
     title: title
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
-      flex: showSplit ? "0 0 50%" : "none",
-      display: showSplit || (url === "letra") ? "flex" : (letra ? "block" : "none"),
+      flex: showSplit ? "0 0 50%" : 1,
+      display: showSplit || (url === "letra") ? "flex" : (letra ? "flex" : "none"),
       flexDirection: "column",
       overflow: "hidden",
       minWidth: 0,
@@ -5418,9 +5418,7 @@ function Repertorio(_ref16) {
   function MaterialBadge(_ref17) {
     var label = _ref17.label,
       icon = _ref17.icon,
-      url = _ref17.url,
-      letra = _ref17.letra,
-      songId = _ref17.songId;
+      url = _ref17.url;
     if (!url) return null;
     return /*#__PURE__*/React.createElement("button", {
       onClick: function onClick(e) {
@@ -5428,8 +5426,8 @@ function Repertorio(_ref16) {
         setPlayer({
           url: url,
           title: label,
-          letra: letra,
-          songId: songId
+          letra: s.letra,
+          songId: s.id
         });
       },
       style: {
@@ -5596,27 +5594,19 @@ function Repertorio(_ref16) {
     }, /*#__PURE__*/React.createElement(MaterialBadge, {
       label: "Partitura",
       icon: "\uD83C\uDFBC",
-      url: s.partitura,
-      letra: s.letra,
-      songId: s.id
+      url: s.partitura
     }), /*#__PURE__*/React.createElement(MaterialBadge, {
       label: "\xC1udio Original",
       icon: "\uD83C\uDFB5",
-      url: s.audioOriginal,
-      letra: s.letra,
-      songId: s.id
+      url: s.audioOriginal
     }), /*#__PURE__*/React.createElement(MaterialBadge, {
       label: "Arranjo",
       icon: "\uD83C\uDFB5",
-      url: s.audioArranjo,
-      letra: s.letra,
-      songId: s.id
+      url: s.audioArranjo
     }), /*#__PURE__*/React.createElement(MaterialBadge, {
       label: "Playback",
       icon: "\uD83C\uDFA7",
-      url: s.playback,
-      letra: s.letra,
-      songId: s.id
+      url: s.playback
     }), temNaipes(s) && /*#__PURE__*/React.createElement("button", {
       onClick: function onClick(e) {
         e.stopPropagation();
