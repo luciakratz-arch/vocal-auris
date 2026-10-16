@@ -591,7 +591,7 @@ function PlayerModal(_ref3) {
       embed: url
     };
   }
-  var _getEmbedUrl = getEmbedUrl(url),
+  var _getEmbedUrl = (url && url !== "letra") ? getEmbedUrl(url) : { type: "letra", embed: "" },
     type = _getEmbedUrl.type,
     embed = _getEmbedUrl.embed;
   return /*#__PURE__*/React.createElement("div", {
@@ -697,9 +697,11 @@ function PlayerModal(_ref3) {
       display: "flex",
       flexDirection: showSplit ? "row" : "column",
       flex: 1,
-      overflow: "hidden",
+      overflowY: showSplit ? "hidden" : "auto",
+      overflowX: "hidden",
       background: "#000",
-      minHeight: 0
+      minHeight: 0,
+      maxHeight: "calc(90vh - 54px)"
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -713,26 +715,28 @@ function PlayerModal(_ref3) {
     src: embed,
     style: {
       width: "100%",
-      height: window.innerWidth < 600 ? 220 : 450,
+      height: hasLetra && !showSplit ? (window.innerWidth < 600 ? 180 : 260) : (window.innerWidth < 600 ? 220 : 450),
       border: "none",
-      display: "block"
+      display: "block",
+      flexShrink: 0
     },
     allow: "autoplay; fullscreen",
     allowFullScreen: true,
     title: title
   }), type === "audio" && /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "32px 24px",
+      padding: "20px 24px 16px",
       textAlign: "center",
-      background: "#1A1D23"
+      background: "#1A1D23",
+      flexShrink: 0
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "music",
-    size: 48,
+    size: 36,
     color: "#555"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      marginTop: 16
+      marginTop: 12
     }
   }, /*#__PURE__*/React.createElement("iframe", {
     src: embed,
@@ -769,12 +773,12 @@ function PlayerModal(_ref3) {
     title: title
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
-      flex: (showSplit || url === "letra") ? 1 : "none",
+      flex: showSplit ? 1 : "none",
       display: (showSplit || url === "letra" || letra) ? "flex" : "none",
       flexDirection: "column",
-      overflow: "hidden",
+      overflow: showSplit ? "hidden" : "visible",
       minWidth: 0,
-      minHeight: 0,
+      minHeight: showSplit ? 0 : undefined,
       background: "#1A1D23"
     }
   }, letra && /*#__PURE__*/React.createElement("div", {
@@ -831,9 +835,9 @@ function PlayerModal(_ref3) {
   )), letra && letraMode === "view" && /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "16px 20px",
-      overflowY: "auto",
-      flex: 1,
-      minHeight: 0,
+      overflowY: showSplit ? "auto" : "visible",
+      flex: showSplit ? 1 : "none",
+      minHeight: showSplit ? 0 : undefined,
       color: "#E0E0E0",
       fontSize: 14,
       lineHeight: 1.9
