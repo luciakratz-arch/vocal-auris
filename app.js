@@ -560,11 +560,7 @@ function PlayerModal(_ref3) {
         type: "audio",
         embed: "https://drive.google.com/file/d/".concat(id, "/preview")
       };
-      if (url.match(/\.pdf/i)) return {
-        type: "pdf",
-        embed: "https://drive.google.com/file/d/".concat(id, "/preview")
-      };
-      // Drive genérico (áudio sem extensão, vídeo) — usa preview iframe
+      // PDF ou vídeo do Drive
       return {
         type: "iframe",
         embed: "https://drive.google.com/file/d/".concat(id, "/preview")
@@ -595,7 +591,7 @@ function PlayerModal(_ref3) {
       embed: url
     };
   }
-  var _getEmbedUrl = (url && url !== "letra") ? getEmbedUrl(url) : { type: "letra", embed: "" },
+  var _getEmbedUrl = getEmbedUrl(url),
     type = _getEmbedUrl.type,
     embed = _getEmbedUrl.embed;
   return /*#__PURE__*/React.createElement("div", {
@@ -620,11 +616,7 @@ function PlayerModal(_ref3) {
       background: "#1A1D23",
       borderRadius: 16,
       overflow: "hidden",
-      boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
-      display: "flex",
-      flexDirection: "column",
-      height: url === "letra" ? "min(90vh, 600px)" : undefined,
-      maxHeight: "90vh"
+      boxShadow: "0 20px 60px rgba(0,0,0,0.5)"
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -701,11 +693,8 @@ function PlayerModal(_ref3) {
       display: "flex",
       flexDirection: showSplit ? "row" : "column",
       flex: 1,
-      overflowY: showSplit ? "hidden" : "auto",
-      overflowX: "hidden",
-      background: "#000",
-      minHeight: 0,
-      maxHeight: "calc(90vh - 54px)"
+      overflow: "hidden",
+      background: "#000"
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -719,28 +708,26 @@ function PlayerModal(_ref3) {
     src: embed,
     style: {
       width: "100%",
-      height: hasLetra && !showSplit ? (window.innerWidth < 600 ? 180 : 260) : (window.innerWidth < 600 ? 220 : 450),
+      height: window.innerWidth < 600 ? 220 : 450,
       border: "none",
-      display: "block",
-      flexShrink: 0
+      display: "block"
     },
     allow: "autoplay; fullscreen",
     allowFullScreen: true,
     title: title
   }), type === "audio" && /*#__PURE__*/React.createElement("div", {
     style: {
-      padding: "20px 24px 16px",
+      padding: "32px 24px",
       textAlign: "center",
-      background: "#1A1D23",
-      flexShrink: 0
+      background: "#1A1D23"
     }
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "music",
-    size: 36,
+    size: 48,
     color: "#555"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      marginTop: 12
+      marginTop: 16
     }
   }, /*#__PURE__*/React.createElement("iframe", {
     src: embed,
@@ -777,12 +764,11 @@ function PlayerModal(_ref3) {
     title: title
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
-      flex: showSplit ? 1 : "none",
-      display: (letra || url === "letra") ? "flex" : "none",
+      flex: showSplit ? "0 0 50%" : "none",
+      display: showSplit || (url === "letra") ? "flex" : (letra ? "block" : "none"),
       flexDirection: "column",
-      overflow: showSplit ? "hidden" : "visible",
+      overflow: "hidden",
       minWidth: 0,
-      minHeight: showSplit ? 0 : undefined,
       background: "#1A1D23"
     }
   }, letra && /*#__PURE__*/React.createElement("div", {
@@ -839,12 +825,8 @@ function PlayerModal(_ref3) {
   )), letra && letraMode === "view" && /*#__PURE__*/React.createElement("div", {
     style: {
       padding: "16px 20px",
-      overflowY: showSplit ? "auto" : "visible",
-      flex: showSplit ? 1 : "none",
-      minHeight: showSplit ? 0 : undefined,
-      color: "#E0E0E0",
-      fontSize: 14,
-      lineHeight: 1.9
+      overflowY: "auto",
+      flex: 1
     }
   }, renderLetraFormatada(letra)),
   letra && letraMode === "edit" && /*#__PURE__*/React.createElement("textarea", {
