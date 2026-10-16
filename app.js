@@ -619,7 +619,7 @@ function PlayerModal(_ref3) {
       boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
       display: "flex",
       flexDirection: "column",
-      minHeight: url === "letra" ? 420 : undefined,
+      height: url === "letra" ? "min(90vh, 600px)" : undefined,
       maxHeight: "90vh"
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -769,12 +769,12 @@ function PlayerModal(_ref3) {
     title: title
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
-      flex: showSplit ? "0 0 50%" : (url === "letra" ? 1 : "none"),
-      display: showSplit || (url === "letra") ? "flex" : (letra ? "block" : "none"),
+      flex: (showSplit || url === "letra") ? 1 : "none",
+      display: (showSplit || url === "letra" || letra) ? "flex" : "none",
       flexDirection: "column",
       overflow: "hidden",
       minWidth: 0,
-      minHeight: url === "letra" ? 300 : 0,
+      minHeight: 0,
       background: "#1A1D23"
     }
   }, letra && /*#__PURE__*/React.createElement("div", {
@@ -832,7 +832,11 @@ function PlayerModal(_ref3) {
     style: {
       padding: "16px 20px",
       overflowY: "auto",
-      flex: 1
+      flex: 1,
+      minHeight: 0,
+      color: "#E0E0E0",
+      fontSize: 14,
+      lineHeight: 1.9
     }
   }, renderLetraFormatada(letra)),
   letra && letraMode === "edit" && /*#__PURE__*/React.createElement("textarea", {
