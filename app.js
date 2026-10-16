@@ -5418,7 +5418,9 @@ function Repertorio(_ref16) {
   function MaterialBadge(_ref17) {
     var label = _ref17.label,
       icon = _ref17.icon,
-      url = _ref17.url;
+      url = _ref17.url,
+      letra = _ref17.letra,
+      songId = _ref17.songId;
     if (!url) return null;
     return /*#__PURE__*/React.createElement("button", {
       onClick: function onClick(e) {
@@ -5426,8 +5428,8 @@ function Repertorio(_ref16) {
         setPlayer({
           url: url,
           title: label,
-          letra: s.letra,
-          songId: s.id
+          letra: letra,
+          songId: songId
         });
       },
       style: {
