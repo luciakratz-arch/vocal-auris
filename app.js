@@ -5596,19 +5596,27 @@ function Repertorio(_ref16) {
     }, /*#__PURE__*/React.createElement(MaterialBadge, {
       label: "Partitura",
       icon: "\uD83C\uDFBC",
-      url: s.partitura
+      url: s.partitura,
+      letra: s.letra,
+      songId: s.id
     }), /*#__PURE__*/React.createElement(MaterialBadge, {
       label: "\xC1udio Original",
       icon: "\uD83C\uDFB5",
-      url: s.audioOriginal
+      url: s.audioOriginal,
+      letra: s.letra,
+      songId: s.id
     }), /*#__PURE__*/React.createElement(MaterialBadge, {
       label: "Arranjo",
       icon: "\uD83C\uDFB5",
-      url: s.audioArranjo
+      url: s.audioArranjo,
+      letra: s.letra,
+      songId: s.id
     }), /*#__PURE__*/React.createElement(MaterialBadge, {
       label: "Playback",
       icon: "\uD83C\uDFA7",
-      url: s.playback
+      url: s.playback,
+      letra: s.letra,
+      songId: s.id
     }), temNaipes(s) && /*#__PURE__*/React.createElement("button", {
       onClick: function onClick(e) {
         e.stopPropagation();
