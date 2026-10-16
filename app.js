@@ -616,7 +616,11 @@ function PlayerModal(_ref3) {
       background: "#1A1D23",
       borderRadius: 16,
       overflow: "hidden",
-      boxShadow: "0 20px 60px rgba(0,0,0,0.5)"
+      boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+      display: "flex",
+      flexDirection: "column",
+      minHeight: url === "letra" ? 420 : undefined,
+      maxHeight: "90vh"
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -694,7 +698,8 @@ function PlayerModal(_ref3) {
       flexDirection: showSplit ? "row" : "column",
       flex: 1,
       overflow: "hidden",
-      background: "#000"
+      background: "#000",
+      minHeight: 0
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -764,11 +769,12 @@ function PlayerModal(_ref3) {
     title: title
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
-      flex: showSplit ? "0 0 50%" : "none",
+      flex: showSplit ? "0 0 50%" : (url === "letra" ? 1 : "none"),
       display: showSplit || (url === "letra") ? "flex" : (letra ? "block" : "none"),
       flexDirection: "column",
       overflow: "hidden",
       minWidth: 0,
+      minHeight: url === "letra" ? 300 : 0,
       background: "#1A1D23"
     }
   }, letra && /*#__PURE__*/React.createElement("div", {
