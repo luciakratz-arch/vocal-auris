@@ -560,7 +560,11 @@ function PlayerModal(_ref3) {
         type: "audio",
         embed: "https://drive.google.com/file/d/".concat(id, "/preview")
       };
-      // PDF ou vídeo do Drive
+      if (url.match(/\.pdf/i)) return {
+        type: "pdf",
+        embed: "https://drive.google.com/file/d/".concat(id, "/preview")
+      };
+      // Drive genérico (áudio sem extensão, vídeo) — usa preview iframe
       return {
         type: "iframe",
         embed: "https://drive.google.com/file/d/".concat(id, "/preview")
@@ -774,7 +778,7 @@ function PlayerModal(_ref3) {
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
       flex: showSplit ? 1 : "none",
-      display: (showSplit || url === "letra" || letra) ? "flex" : "none",
+      display: (letra || url === "letra") ? "flex" : "none",
       flexDirection: "column",
       overflow: showSplit ? "hidden" : "visible",
       minWidth: 0,
