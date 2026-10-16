@@ -826,7 +826,10 @@ function PlayerModal(_ref3) {
     style: {
       padding: "16px 20px",
       overflowY: "auto",
-      flex: 1
+      flex: 1,
+      color: "#EEE",
+      fontSize: 13,
+      lineHeight: 1.8
     }
   }, renderLetraFormatada(letra)),
   letra && letraMode === "edit" && /*#__PURE__*/React.createElement("textarea", {
