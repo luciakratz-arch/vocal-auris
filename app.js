@@ -557,11 +557,27 @@ function PlayerModal(_ref3) {
   var _useState_letraMsg = React.useState(""), letraMsg = _useState_letraMsg[0], setLetraMsg = _useState_letraMsg[1];
   var letraRef = React.useRef(null);
   function salvarLetra() {
-    if (!songId) return;
+    if (!songId) {
+      setLetraMsg("❌ Não foi possível identificar a música.");
+      return;
+    }
     setLetraSaving(true);
+    setLetraMsg("");
     db.collection("auris_songs").doc(songId).update({ letra: letraEdit, updatedAt: firebase.firestore.FieldValue.serverTimestamp() })
       .then(function() { setLetraSaving(false); setLetraMode("view"); setLetraMsg("✅ Salvo!"); setTimeout(function() { setLetraMsg(""); }, 2500); })
-      .catch(function() { setLetraSaving(false); setLetraMsg("❌ Erro ao salvar"); });
+      .catch(function(error) {
+        console.error("[PlayerModal] Falha ao salvar letra:", error);
+        setLetraSaving(false);
+        if (error && error.code === "permission-denied") {
+          setLetraMsg("❌ Sem permissão para salvar. Entre como administradora.");
+        } else if (error && (error.code === "unavailable" || error.code === "deadline-exceeded")) {
+          setLetraMsg("❌ Falha de conexão. Confira a internet e tente novamente.");
+        } else if (error && error.code === "not-found") {
+          setLetraMsg("❌ Música não encontrada. Atualize o repertório e tente novamente.");
+        } else {
+          setLetraMsg("❌ Não foi possível salvar" + (error && error.code ? " (" + error.code + ")" : "") + ".");
+        }
+      });
   }
   function renderLetraFormatada(txt) {
     if (!txt) return null;
