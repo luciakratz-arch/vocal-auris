@@ -551,7 +551,6 @@ function PlayerModal(_ref3) {
   var hasMedia = url && url !== "letra";
   var hasLetra = !!(letra);
   var canSplit = hasMedia && hasLetra;
-  var _useState_split = React.useState(false), showSplit = _useState_split[0], setShowSplit = _useState_split[1];
   var _useState_letraEdit = React.useState(letra || ""), letraEdit = _useState_letraEdit[0], setLetraEdit = _useState_letraEdit[1];
   var _useState_letraMode = React.useState("view"), letraMode = _useState_letraMode[0], setLetraMode = _useState_letraMode[1];
   var _useState_letraSaving = React.useState(false), letraSaving = _useState_letraSaving[0], setLetraSaving = _useState_letraSaving[1];
